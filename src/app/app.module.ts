@@ -13,9 +13,31 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import { YagaModule } from '@yaga/leaflet-ng2';
 
+//////////////////////J'ai importé ça à cause des lignes que j'ai ajouté
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { SignInComponent } from './app/sign-in/sign-in.component';
+import { LoginComponent } from './login/login.component';
+import { SigninComponent } from './signin/signin.component';
+import { ForgotPasswoordComponent } from './forgot-passwoord/forgot-passwoord.component';
+import { VerifyMailComponent } from './verify-mail/verify-mail.component';
+import { EmailComponent } from './email/email.component';
+import { SignupComponent } from './signup/signup.component';
+import { MembersComponent } from './members/members.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignInComponent,
+    LoginComponent,
+    SigninComponent,
+    ForgotPasswoordComponent,
+    VerifyMailComponent,
+    EmailComponent,
+    SignupComponent,
+    MembersComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +50,11 @@ import { YagaModule } from '@yaga/leaflet-ng2';
     MatInputModule,
     MatSelectModule,
     MatMenuModule,
-    YagaModule
+    YagaModule,
+
+    /**MES AJOUTS SUIVI DE ONENOTE/ */
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

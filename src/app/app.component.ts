@@ -19,7 +19,7 @@ export class AppComponent {
 
   /*MON CODE SUIVI DE ONENOTE*/
 
-  user:Observable<User> | undefined;
+  //user:Observable<User> | undefined;
   title: any;
 
 
@@ -37,16 +37,13 @@ export class AppComponent {
       this.auth.signOut();
     }
 
-    tableChamis(): void {
+    /*tableChamis(): void {
       fetch('http://chamis.herokuapp.com')
         .then(res => res.json)
         .then (data => console.log(data))
-    }
+    }*/
 
 
 }
 
-function https(https: any, arg1: any) {
-  throw new Error('Function not implemented.');
-}
 

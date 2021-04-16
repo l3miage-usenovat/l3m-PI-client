@@ -1,7 +1,9 @@
+import { Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { OSM_TILE_LAYER_URL } from '@yaga/leaflet-ng2';
 import firebase from 'firebase/app';
+import { User } from './user/user.module';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,11 @@ export class AppComponent {
 
   /*MON CODE SUIVI DE ONENOTE*/
 
-  constructor(public auth: AngularFireAuth) {}
+  user:Observable<User> | undefined;
+  title: any;
+
+
+  constructor(public auth: AngularFireAuth) {  }
 
     login(): void {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -30,4 +36,17 @@ export class AppComponent {
     logout(): void {
       this.auth.signOut();
     }
+
+    tableChamis(): void {
+      fetch('http://chamis.herokuapp.com')
+        .then(res => res.json)
+        .then (data => console.log(data))
+    }
+
+
 }
+
+function https(https: any, arg1: any) {
+  throw new Error('Function not implemented.');
+}
+

@@ -18,26 +18,12 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { SignInComponent } from './app/sign-in/sign-in.component';
-import { LoginComponent } from './login/login.component';
-import { SigninComponent } from './signin/signin.component';
-import { ForgotPasswoordComponent } from './forgot-passwoord/forgot-passwoord.component';
-import { VerifyMailComponent } from './verify-mail/verify-mail.component';
-import { EmailComponent } from './email/email.component';
-import { SignupComponent } from './signup/signup.component';
-import { MembersComponent } from './members/members.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SignInComponent,
-    LoginComponent,
-    SigninComponent,
-    ForgotPasswoordComponent,
-    VerifyMailComponent,
-    EmailComponent,
-    SignupComponent,
-    MembersComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +41,8 @@ import { MembersComponent } from './members/members.component';
     /**MES AJOUTS SUIVI DE ONENOTE/ */
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

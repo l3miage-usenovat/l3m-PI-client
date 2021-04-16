@@ -1,4 +1,4 @@
-<!--<mat-toolbar>
+<mat-toolbar>
   <button mat-icon-button class="example-icon" aria-label="Menu">
     <mat-icon (click)="drawer.toggle()">menu</mat-icon>
   </button>
@@ -16,28 +16,19 @@
   <mat-menu #menuConnect="matMenu">
 
     <button mat-menu-item
-
       (click)="login()">
-
       <img [src]="dataIconGoogle" width="24" height="24"/>
       &nbsp;
-      <span>Compte Google</span>
+      <span>Login avec Google</span>
     </button>
   </mat-menu>
 
-
-
-
-
-  <mat-menu #menuDisconnect="matMenu">
-    <button mat-menu-item
-
-      (click)="logout()">
-
-      <mat-icon>logout</mat-icon>
-      <span>Déconnexion</span>
-
-    </button>
+ <mat-menu #menuDisconnect="matMenu">
+      <button mat-menu-item
+        (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Déconnexion</span>
+      </button>
   </mat-menu>
 
 </mat-toolbar>
@@ -69,9 +60,5 @@
     </yaga-map>
 
   </mat-drawer-content>
-</mat-drawer-container>-->
-
-
-
-<router-outlet></router-outlet>
+</mat-drawer-container>
 

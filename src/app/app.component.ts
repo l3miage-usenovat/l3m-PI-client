@@ -32,7 +32,7 @@ export class AppComponent  implements OnInit{
   @Input() utilisateurName! : string;
   @Input() utilisateurAge! : string;
   @Input() nbDefi! : number;
-  defistab : Defi [] = [];
+  defistab! : Defi [];
 
 
   constructor(public auth: AngularFireAuth, private serviceUser:UsersService, private serviceDefi:DefisService) {  }
@@ -89,8 +89,8 @@ export class AppComponent  implements OnInit{
 
     getLignes(){
       const ligne = "https://data.mobilites-m.fr/api/lines/json?types=ligne&reseaux=SEM";
-
-    function trouveNbDEFI(nom: string): number{
+    }
+    trouveNbDEFI(nom: string): number{
       let nombre : number = 0;
       let i: number = 0;
       for(i= 0 ; i< this.defistab.length; i++){
@@ -102,7 +102,7 @@ export class AppComponent  implements OnInit{
       return nombre;
     }
 
-    function CreateNewUser(){
+    CreateNewUser(){
      const person = {
         "pseudo":"Tieux",
         "age": 18
@@ -115,7 +115,7 @@ export class AppComponent  implements OnInit{
 
 
 
-    function rgba_to_hex_string(color: any) {
+    gba_to_hex_string(color: any) {
       return color.split(',').map((component: string) => parseInt(component))
       .map((component: { toString: (arg0: number) => any; }) => component.toString(16))
       .map((component: string) => component.padStart(2, '0'))
@@ -124,5 +124,4 @@ export class AppComponent  implements OnInit{
   }
 
 }
-
 

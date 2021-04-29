@@ -14,7 +14,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import { YagaModule } from '@yaga/leaflet-ng2';
 import { HttpClientModule } from '@angular/common/http';
 
-
 //////////////////////J'ai importé ça à cause des lignes que j'ai ajouté
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -43,7 +42,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
     MatSelectModule,
     MatMenuModule,
     YagaModule,
-
+    HttpClientModule,
     /**MES AJOUTS SUIVI DE ONENOTE/ */
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

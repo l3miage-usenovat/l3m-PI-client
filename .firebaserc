@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "chamis-53c3b": {
+      "hosting": {
+        "amorce-client": [
+          "chamis-53c3b"
+        ]
+      }
+    }
+  }
+}

@@ -25,6 +25,7 @@ export class AppComponent  implements OnInit{
 
   //user:Observable<User> | undefined;
   title: any;
+  public donnees : any = [];
 
   users! : Observable<Chami[]>;
   defis! : Observable<Defi[]>;
@@ -37,6 +38,7 @@ export class AppComponent  implements OnInit{
   constructor(public auth: AngularFireAuth, private serviceUser:UsersService, private serviceDefi:DefisService) {  }
   ngOnInit(){
     this.getDefi();
+    this.getLignes();
 
   }
 
@@ -85,7 +87,10 @@ export class AppComponent  implements OnInit{
         .then (data => console.log(data))
     }*/
 
-    trouveNbDEFI(nom: string): number{
+    getLignes(){
+      const ligne = "https://data.mobilites-m.fr/api/lines/json?types=ligne&reseaux=SEM";
+
+    function trouveNbDEFI(nom: string): number{
       let nombre : number = 0;
       let i: number = 0;
       for(i= 0 ; i< this.defistab.length; i++){
@@ -97,7 +102,7 @@ export class AppComponent  implements OnInit{
       return nombre;
     }
 
-    CreateNewUser(){
+    function CreateNewUser(){
      const person = {
         "pseudo":"Tieux",
         "age": 18
@@ -108,20 +113,15 @@ export class AppComponent  implements OnInit{
 
     }
 
-    geojsonFeature = {
-    "type": "Feature",
-    "properties": {
-        "name": "Coors Field",
-        "amenity": "Baseball Stadium",
-        "popupContent": "This is where the Rockies play!"
-    },
-    "geometry": {
-        "type": "Point",
-        "coordinates": [-104.99404, 39.75621]
-    }
-};
 
-couleur = "green";
+
+    function rgba_to_hex_string(color: any) {
+      return color.split(',').map((component: string) => parseInt(component))
+      .map((component: { toString: (arg0: number) => any; }) => component.toString(16))
+      .map((component: string) => component.padStart(2, '0'))
+      .join('')
+      .padStart(7, '#');
+  }
 
 }
 

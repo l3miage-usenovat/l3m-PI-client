@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import { YagaModule } from '@yaga/leaflet-ng2';
+import { HttpClientModule } from '@angular/common/http';
 
 //////////////////////J'ai importé ça à cause des lignes que j'ai ajouté
 import { environment } from 'src/environments/environment';
@@ -37,7 +38,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatSelectModule,
     MatMenuModule,
     YagaModule,
-
+    HttpClientModule,
     /**MES AJOUTS SUIVI DE ONENOTE/ */
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule

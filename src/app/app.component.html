@@ -55,6 +55,12 @@
                     [opacity] = "1"
                     >
         <yaga-icon [iconUrl]="iconMarker"></yaga-icon>
+        <yaga-polyline *ngFor="let ligne of donnees.features" [color] = "rgba_to_hex_string(ligne.properties.COULEUR)" [geoJSON] = "ligne">
+          <yaga-popup>
+            <h1>Ligne {{ligne.properties.NUMERO}}</h1>
+            <h4>Destination de la ligne : {{ligne.properties.LIBELLE}}</h4>
+          </yaga-popup>
+        </yaga-polyline>
       </yaga-marker>
 
     </yaga-map>

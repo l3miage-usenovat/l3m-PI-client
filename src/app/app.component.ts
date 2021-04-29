@@ -1,9 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { OSM_TILE_LAYER_URL } from '@yaga/leaflet-ng2';
 import firebase from 'firebase/app';
-import { User } from './user/user.module';
+//import { User } from './user/user.module';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +22,9 @@ export class AppComponent {
 
   //user:Observable<User> | undefined;
   title: any;
+  public donnees : any = [];
 
-
-  constructor(public auth: AngularFireAuth) {  }
+  constructor(public auth: AngularFireAuth, private http : HttpClient) {  }
 
     login(): void {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -42,8 +43,24 @@ export class AppComponent {
         .then(res => res.json)
         .then (data => console.log(data))
     }*/
+    ngOnInit(): void {
+      this.getLignes();
+    }
+    getLignes(){
+      const ligne = "https://data.mobilites-m.fr/api/lines/json?types=ligne&reseaux=SEM";
 
+      this.http.get(ligne).subscribe((semi) => {
+        this.donnees = semi;
+      })
+    }
+
+
+    rgba_to_hex_string(color: any) {
+      return color.split(',').map((component: string) => parseInt(component))
+      .map((component: { toString: (arg0: number) => any; }) => component.toString(16))
+      .map((component: string) => component.padStart(2, '0'))
+      .join('')
+      .padStart(7, '#');
+  }
 
 }
-
-

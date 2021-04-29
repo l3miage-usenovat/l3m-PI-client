@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar >
   <button mat-icon-button class="example-icon" aria-label="Menu">
     <mat-icon (click)="drawer.toggle()">menu</mat-icon>
   </button>
@@ -9,33 +9,69 @@
 
   <label class="spacer"></label>
 
-  <mat-icon [matMenuTriggerFor]="menuConnect">
-    account_circle
-  </mat-icon>
 
-  <mat-menu #menuConnect="matMenu">
+    <mat-icon  *ngIf="!(obs |async ) " [matMenuTriggerFor]="menuConnect"  >
+
+           account_circle
+
+       </mat-icon>
+
+    <mat-icon  [matMenuTriggerFor]="menuDisconnect"  >
+        <div *ngIf = "obs | async as observable">
+        <div>{{observable.isAnonymous}}</div>
+        account_circle
+
+
+
+        </div>
+     </mat-icon>
+
+
+
+
+
+
+
+
+    <mat-menu  #menuConnect="matMenu"   >
+      <div >
+        <button mat-menu-item
+        (click)="login()"  >
+        <img [src]="dataIconGoogle" width="24" height="24"/>
+        &nbsp;
+        <span >Login avec Google</span>
+
+      </button>
+
+      </div>
+
+
+
+
+    </mat-menu>
+
+
+   <mat-menu   #menuDisconnect="matMenu" >
 
     <button mat-menu-item
-      (click)="login()">
-      <img [src]="dataIconGoogle" width="24" height="24"/>
-      &nbsp;
-      <span>Login avec Google</span>
-    </button>
-  </mat-menu>
-
- <mat-menu #menuDisconnect="matMenu">
-      <button mat-menu-item
         (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Déconnexion</span>
       </button>
+
+
+
   </mat-menu>
+
+
 
 </mat-toolbar>
 
 <mat-drawer-container class="example-container">
   <mat-drawer #drawer [mode]="mode.value">
+
     Placez votre menu ici...
+
   </mat-drawer>
   <mat-drawer-content>
     <mat-form-field>
@@ -47,6 +83,52 @@
       </mat-select>
     </mat-form-field>
 
+
+
+     <pre >
+
+      <button (click)="CreateNewUser()">M'inscrire à la communaté des Chamis</button>
+
+  <button *ngIf = "obs | async as observable" (click)="obsUser()"> Chamis </button>
+
+  <table *ngIf=" users |async">
+    <tbody>
+      <tr>
+        <td>Auteur</td>
+        <td>ÂGE</td>
+        <td>Défis créée</td>
+      </tr>
+      <tr *ngFor =" let utilisateur of users |async" >
+        <td> {{utilisateur.pseudo}}</td>
+        <td> {{utilisateur.age}}</td>
+        <td> {{trouveNbDEFI(utilisateur.pseudo)}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+  <button  *ngIf = "obs | async as observable" (click)="obsDefi()"> Défis </button>
+
+  <table *ngIf=" defis |async">
+    <tbody>
+      <tr>
+        <td>Défi</td>
+        <td>Titre</td>
+        <td>Auteur</td>
+        <td>Date de création</td>
+      </tr>
+      <tr *ngFor =" let defi of defis |async">
+
+        <td>{{defi.id}}</td>
+        <td>{{defi.titre}}</td>
+        <td>{{defi.auteur}}</td>
+        <td>{{defi.dateDeCreation}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+</pre>
+
     <yaga-map [lng]="5.724524" [lat]="45.188529" [zoom]="12">
       <yaga-tile-layer [(url)]="tileLayerUrl"></yaga-tile-layer>
       <yaga-marker  [lng] = "5.724524"
@@ -56,9 +138,18 @@
                     >
         <yaga-icon [iconUrl]="iconMarker"></yaga-icon>
       </yaga-marker>
+      <yaga-polyline [color] = "couleur" >
+
+      </yaga-polyline>
+
+
+
+
 
     </yaga-map>
 
+
   </mat-drawer-content>
 </mat-drawer-container>
+
 

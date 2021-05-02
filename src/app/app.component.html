@@ -85,7 +85,7 @@
 
 
 
-     <pre >
+<pre>
 
   <button *ngIf = "obs | async as observable" (click)="obsUser()"> Chamis </button>
 
@@ -113,6 +113,8 @@
         <td>Titre</td>
         <td>Auteur</td>
         <td>Date de création</td>
+        <td>Latitude</td>
+        <td>Longitude</td>
       </tr>
       <tr *ngFor =" let defi of defis |async">
 
@@ -120,37 +122,85 @@
         <td>{{defi.titre}}</td>
         <td>{{defi.auteur}}</td>
         <td>{{defi.dateDeCreation}}</td>
+        <td>{{defi.latitude}}</td>
+        <td>{{defi.longitude}}</td>
 
       </tr>
     </tbody>
   </table>
 
+
 </pre>
 
-    <yaga-map [lng]="5.724524" [lat]="45.188529" [zoom]="12">
+
+
+
+    <yaga-map *ngIf = "obs | async as observable"
+      [lng]="5.724524" [lat]="45.188529" [zoom]="12">
       <yaga-tile-layer [(url)]="tileLayerUrl"></yaga-tile-layer>
-      <yaga-marker  [lng] = "5.724524"
-                    [lat] = "45.188529"
+      <!-- ajout des arrêt  45.19029073446951, 5.728219999998793 -->
+      <!-- pour ajouter  les defis sur la map nous avons besoins de la longitude et de la
+        latitude,  une idée voudrait que nous ajoutons des atributs latitude et longitude à la BD qui
+        serviront à recuperer et à afficher les defi à la position ansi decrite -->
+     <yaga-marker *ngFor =" let defi of defistab"
+                    [lng] = "defi.longitude"
+                    [lat] = "defi.latitude"
                     [display] = "true"
                     [opacity] = "1"
                     >
-        <yaga-icon [iconUrl]="iconMarker"></yaga-icon>
-        <!--<yaga-polyline *ngFor="let ligne of donnees.features" [color] = "rgba_to_hex_string(ligne.properties.COULEUR)" [geoJSON] = "ligne">
+
+
+      <yaga-icon [iconUrl]="iconMarker"></yaga-icon>
+           <yaga-popup >{{defi.description}}</yaga-popup>
+     </yaga-marker>
+
+     <!-- <yaga-marker
+                    [lng] = "5.724524"
+                    [lat] = "45.188529"
+                    [display] = "true"
+                    [opacity] = "1"
+                    > --> <!-- à retoucher -->
+
+
+        <!--<yaga-icon [iconUrl]="iconMarker"></yaga-icon>
+
+      </yaga-marker>-->
+
+
+      <yaga-polyline
+        *ngFor="let ligne of donnees.features"
+        [color] = "convertToString(ligne.properties.COULEUR)"
+        [geoJSON] = "ligne"
+        >
           <yaga-popup>
             <h1>Ligne {{ligne.properties.NUMERO}}</h1>
             <h4>Destination de la ligne : {{ligne.properties.LIBELLE}}</h4>
           </yaga-popup>
-        </yaga-polyline> -->
-      </yaga-marker>
-
-
-
-
+        </yaga-polyline>>
 
     </yaga-map>
 
 
   </mat-drawer-content>
 </mat-drawer-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

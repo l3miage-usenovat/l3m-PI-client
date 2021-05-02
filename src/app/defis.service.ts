@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Defi } from './ChamisDefiDefinition';
+import { Defi } from './ChamoiDefinition';
 
 
 @Injectable({

@@ -1,13 +1,15 @@
+import { GestionLignesArretsService } from './gestion-lignes-arrets.service';
 import { element } from 'protractor';
 import { DefisService } from './defis.service';
 import { UsersService } from './users.service';
 import { Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { OSM_TILE_LAYER_URL } from '@yaga/leaflet-ng2';
+import { FeatureGroupDirective, OSM_TILE_LAYER_URL, PolylineDirective } from '@yaga/leaflet-ng2';
 import firebase from 'firebase/app';
-import { Chami, Defi } from './ChamisDefiDefinition';
+import { Chami, Defi, TAGARRETProperties, TAGProperties } from './ChamoiDefinition';
 import { HttpErrorResponse } from '@angular/common/http';
+import {FeatureCollection, MultiLineString} from "geojson";
 
 @Component({
   selector: 'app-root',
@@ -25,7 +27,11 @@ export class AppComponent  implements OnInit{
 
   //user:Observable<User> | undefined;
   title: any;
-  public donnees : any = [];
+  // Le bon type :
+  //   FeatureCOllection est un type générique standard dans geojson
+  //   il est générique et paramétrable avec le type de géométrie et le tye de propriété :
+  public donnees! : FeatureCollection<MultiLineString, TAGProperties>;
+  public donneesArret! : FeatureCollection<MultiLineString, TAGARRETProperties>;
 
   users! : Observable<Chami[]>;
   defis! : Observable<Defi[]>;
@@ -35,10 +41,11 @@ export class AppComponent  implements OnInit{
   defistab! : Defi [];
 
 
-  constructor(public auth: AngularFireAuth, private serviceUser:UsersService, private serviceDefi:DefisService) {  }
+  constructor(public auth: AngularFireAuth, private serviceUser:UsersService, private serviceDefi:DefisService, private serviceLigneArret: GestionLignesArretsService) {  }
   ngOnInit(){
     this.getDefi();
-    this.getLignes();
+    this.getLines();
+    this.getArrets();
 
   }
 
@@ -78,6 +85,28 @@ export class AppComponent  implements OnInit{
     )
   }
 
+  getLines(){
+    this.serviceLigneArret.getLignes().subscribe(
+      (response)=>{
+       this.donnees = response;
+      },
+      (error: HttpErrorResponse)=>{
+        alert(error.message);
+      }
+    )
+  }
+
+  getArrets(){
+    this.serviceLigneArret.getArrets().subscribe(
+      (response)=>{
+       this.donneesArret = response;
+      },
+      (error: HttpErrorResponse)=>{
+        alert(error.message);
+      }
+    )
+  }
+
 
 
 
@@ -87,9 +116,6 @@ export class AppComponent  implements OnInit{
         .then (data => console.log(data))
     }*/
 
-    getLignes(){
-      const ligne = "https://data.mobilites-m.fr/api/lines/json?types=ligne&reseaux=SEM";
-    }
     trouveNbDEFI(nom: string): number{
       let nombre : number = 0;
       let i: number = 0;
@@ -101,7 +127,7 @@ export class AppComponent  implements OnInit{
       }
       return nombre;
     }
-
+    // doit être
     CreateNewUser(){
      const person = {
         "pseudo":"Tieux",
@@ -115,7 +141,7 @@ export class AppComponent  implements OnInit{
 
 
 
-    gba_to_hex_string(color: any) {
+    convertToString(color: any) {
       return color.split(',').map((component: string) => parseInt(component))
       .map((component: { toString: (arg0: number) => any; }) => component.toString(16))
       .map((component: string) => component.padStart(2, '0'))

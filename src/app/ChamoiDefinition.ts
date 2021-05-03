@@ -6,8 +6,19 @@ export interface Defi {
    dateDeCreation: string;
    auteur:string;
   description: string;
+  type: string;
+  dateDeModification: string;
+  arret: string;
+  distanciel: string;
+  motCles: string;
+  points: number;
+  duree: string;
+  indices: string;
+  evaluation: string;
+  epilogue: string;
   latitude: number;
   longitude: number;
+
 }
 
 export interface Chami {

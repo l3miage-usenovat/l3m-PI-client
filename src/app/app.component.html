@@ -88,6 +88,34 @@
 
 <pre>
 
+  <!-- Affichage et edition des details d'un defi-->
+  <!--<form (action) = "creationDefi(idDefi.value,titre.value,arret.value,motCle.value,description.value)">
+    <label>Défi</label>          <input type="text" #idDefi/>
+
+    <label>Titre</label>         <input type="text" #titre/>
+
+    <label>Arrêt</label>         <select #arret>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
+
+                                 </select>
+
+    <label>Mots clés</label>     <input type="text" #motCle/>
+
+    <label>Description</label>   <textarea class="form-control" #description rows="7"></textarea>
+
+  </form>-->
+
+  <button (click)="CreateNewUser()">
+    tester la fonction de creation de Chami
+  </button>
+
   <button *ngIf = "obs | async as observable" (click)="obsUser()"> Chamis </button>
 
   <table *ngIf=" users |async">

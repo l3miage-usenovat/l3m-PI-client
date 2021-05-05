@@ -67,11 +67,22 @@ export class CreationDefisComponent implements OnInit {
       auteur: '',
       description: this.getDescription()?.value,
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+     type: '',
+     dateDeModification: '',
+     arret: '',
+     distanciel: '',
+     motCles: '',
+     points: 0,
+     duree: '',
+     indices: '',
+     evaluation: '',
+     epilogue: '',
     }
 
     console.log(this.defis);
     this.defiService.addDefis(this.defis);
+
     this.dialogueReference.close();
   }
 

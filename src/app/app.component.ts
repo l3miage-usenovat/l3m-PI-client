@@ -134,7 +134,8 @@ export class AppComponent  implements OnInit{
     CreateNewUser(){
      const person = {
         "pseudo":"Tieux",
-        "age": 18
+        "age": 18,
+        "description": " eh voila je sui un chaMis"
       }
       console.log('je suis la')
       return this.serviceUser.addNewUser(person);
@@ -152,8 +153,27 @@ export class AppComponent  implements OnInit{
       .padStart(7, '#');
   }
 
+<<<<<<< HEAD
   ajout(){
     this.dialogue.open(CreationDefisComponent);
   }
+=======
+  // fonction à implementer
+  creationDefi(idDefi: string,titre:string,arret:string,motCle:string,description:string):void{
+    let newDefi!:Defi;
+    newDefi.id = idDefi;
+    newDefi.titre = titre;
+    newDefi.arret = arret;
+    newDefi.motCles  = motCle;
+    newDefi.description = description;
+    // reflichir à l'initialisationn des autre données tel que la latitude
+    // longitude nom auteur et date de creation date de modification
+    // le formulaire servira en effet à modifier des defi existants prendre en compte ce paramètre
+    // dans la mis en place de la fonction
+
+
+  }
+
+>>>>>>> c1cec6c59e19d9a69268a5fb48b2d39cbf44e60b
 }
 

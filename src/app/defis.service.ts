@@ -14,4 +14,8 @@ export class DefisService {
   fetchDefis(): Observable<Defi[]>{
     return this.requete.get<Defi[]>('http://localhost:5000/api/defis/');
   }
+
+  addDefis(defis : Defi): Observable<Defi>{
+    return this.requete.post<Defi>(`http://localhost:5000/api/defis/${defis.id}`, defis);
+  }
 }

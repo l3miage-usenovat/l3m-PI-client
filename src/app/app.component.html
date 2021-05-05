@@ -3,9 +3,10 @@
     <mat-icon (click)="drawer.toggle()">menu</mat-icon>
   </button>
 
-  <label>
+  <label routerLink=''>
     Projet intégrateur
   </label>
+  <button mat-raised-button color='accent' class="creation" (click)="ajout()">Créer un défi</button>
 
   <label class="spacer"></label>
 
@@ -175,6 +176,7 @@
           <yaga-popup>
             <h1>Ligne {{ligne.properties.NUMERO}}</h1>
             <h4>Destination de la ligne : {{ligne.properties.LIBELLE}}</h4>
+
           </yaga-popup>
         </yaga-polyline>>
 
@@ -184,6 +186,7 @@
   </mat-drawer-content>
 </mat-drawer-container>
 
+<router-outlet></router-outlet>
 
 
 

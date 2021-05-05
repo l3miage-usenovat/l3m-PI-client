@@ -1,3 +1,4 @@
+import { CreationDefisComponent } from './creation-defis/creation-defis.component';
 import { GestionLignesArretsService } from './gestion-lignes-arrets.service';
 import { element } from 'protractor';
 import { DefisService } from './defis.service';
@@ -10,6 +11,7 @@ import firebase from 'firebase/app';
 import { Chami, Defi, TAGARRETProperties, TAGProperties } from './ChamoiDefinition';
 import { HttpErrorResponse } from '@angular/common/http';
 import {FeatureCollection, MultiLineString} from "geojson";
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +43,8 @@ export class AppComponent  implements OnInit{
   defistab! : Defi [];
 
 
-  constructor(public auth: AngularFireAuth, private serviceUser:UsersService, private serviceDefi:DefisService, private serviceLigneArret: GestionLignesArretsService) {  }
+  constructor(public auth: AngularFireAuth, private serviceUser:UsersService, private serviceDefi:DefisService, private serviceLigneArret: GestionLignesArretsService,
+    public dialogue: MatDialog) {  }
   ngOnInit(){
     this.getDefi();
     this.getLines();
@@ -149,5 +152,8 @@ export class AppComponent  implements OnInit{
       .padStart(7, '#');
   }
 
+  ajout(){
+    this.dialogue.open(CreationDefisComponent);
+  }
 }
 

@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Enregistrer un défi</h2>
+<div mat-dialog-content>
+<form [formGroup]="form">
+  <div class="formulaire">
+    <div formGroupName='creation'>
+    <mat-form-field appearance="fill" class="defi">
+
+      <mat-label>Défi</mat-label>
+      <input matInput formControlName="defi" >
+      <mat-error>L'id du défi est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="titre">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName='titre'>
+      <mat-error *ngIf=''>Le titre du défi est obligatoire.</mat-error>
+      <mat-error *ngIf=''>Le titre doit avoir au moins 3 caractères.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="arrets">
+      <mat-label>Arrets</mat-label>
+      <mat-select formControlName='arrets'>
+        <mat-option value="one">Arret 1</mat-option>
+        <mat-option value="two">Arret 2</mat-option>
+       </mat-select>
+       <mat-error> choix de l'arret est obligatoire</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="mots">
+      <mat-label>Mots clé</mat-label>
+    <input matInput formControlName='motscles'>
+    <mat-error>les mots clé obligatoire </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="description">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName='description' cols=20 rows=10></textarea>
+      <mat-error>la description est obligatoire</mat-error>
+    </mat-form-field>
+</div>
+</div>
+</form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color='primary' [disabled]='form?.invalid' (click)='ajoutDefi()'>Save</button>
+  <button mat-raised-button color='accent' (click)='fermerDefi()'>Close</button>
+</div>

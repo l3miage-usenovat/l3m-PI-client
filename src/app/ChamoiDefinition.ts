@@ -3,7 +3,7 @@ import { GeoJSONDirective, PolylineDirective } from "@yaga/leaflet-ng2";
 export interface Defi {
    id: string;
    titre: string;
-   dateDeCreation: string;
+   dateDeCreation: Date;
    auteur:string;
   description: string;
   latitude: number;

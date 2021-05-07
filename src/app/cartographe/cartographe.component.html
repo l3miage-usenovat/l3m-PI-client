@@ -1,0 +1,251 @@
+
+     <button mat-raised-button color='primary' class="creation" (click)="ajout()">Créer un défi</button>
+     <br/> <br/> <br/>
+
+  <!-- Profil ChaMis-->
+  <div *ngIf="obs | async as user">
+    <div>{{recuperUserCourant(user)}}</div>
+    <button mat-raised-button color="primary" class="profil" (click)="activerInfoProfil()">Mon Profil</button>
+      <section *ngIf="statusProfil">
+          <label> Pseudo : </label><div>{{chamisCourant.pseudo}}</div> <br/>
+          <label> Email  : </label><div>{{chamisCourant.email}}</div> <br/>
+          <label> Âge : </label><div>{{chamisCourant.age}}</div> <br/>
+          <label> Ville : </label><div>{{chamisCourant.ville}}</div> <br/>
+          <label> Description : </label><div>{{chamisCourant.description}}</div> <br/>
+
+        <button mat-raised-button color="primary" (click)="desactiverInfoProfil()">Masquer Mes informations personnelles</button>
+      </section>
+</div> <br/> <br/> <br/>
+
+<!-- Mes DEfis -->
+<div>
+  <button mat-raised-button color="primary" class="defi" (click)="trouverDefisChamisCourant(chamisCourant.pseudo)"
+        >Mes  Défis Crées</button>
+    <div *ngIf="chamisNew |async"></div>
+      <section>
+      <section class="mesDefis">
+      <table *ngIf="statusAfficheDefis">
+          <tbody>
+            <tr>
+              <td>Défi</td>
+              <td>Titre</td>
+              <td>Auteur</td>
+              <td>Date de création</td>
+              <td>Latitude</td>
+              <td>Longitude</td>
+            </tr>
+            <tr *ngFor =" let mesdefi of defisChamiCourantTab">
+
+              <td>{{mesdefi.id}}</td>
+              <td>{{mesdefi.titre}}</td>
+              <td>{{mesdefi.auteur}}</td>
+              <td>{{mesdefi.dateDeCreation}}</td>
+              <td>{{mesdefi.latitude}}</td>
+              <td>{{mesdefi.longitude}}</td>
+
+            </tr>
+          </tbody>
+      </table>
+      <button *ngIf="statusAfficheDefis" mat-raised-button color="primary" (click)="masquerMesDefis()"
+        >Masquer mes défis</button>
+    </section>
+  </section>
+</div> <br/> <br/>  <br/>
+
+
+
+  <!-- Modification personnel -->
+  <button mat-raised-button color="primary" class="modifProfil"(click)="activerEdition()">Modifier Mon profil</button>
+  <section *ngIf="estEditable">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" [value]=chamisCourant.email #email>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Pseudo</mat-label>
+          <input matInput type="text" [value]=chamisCourant.pseudo #pseudo>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Âge</mat-label>
+          <input matInput type="text" [value]=chamisCourant.age #age>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Ville</mat-label>
+          <input matInput type="text" [value]=chamisCourant.ville #ville>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput  [value]=chamisCourant.description #description></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="miseAjourInfo(email.value,pseudo.value,age.value ,ville.value, description.value)"
+        >Mettre à jour mes informations</button>
+
+        <button mat-raised-button color="primary" (click)="desactiverEdition()">Annuler</button>
+
+ </section> <br/> <br/> <br/>
+
+
+   <!-- Affichage et edition d'un arrêt-->
+
+<button mat-raised-button color ="primary" (click)="editionAret()">Créer ou Modifier un Arrêt</button>
+<section *ngIf="editerArret">
+<mat-form-field appearance="fill">
+  <mat-label>Nom</mat-label>
+  <input matInput [value]=arretVide.nom  #nom>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Code</mat-label>
+  <input matInput [value]=arretVide.code  #code>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>StreetMap</mat-label>
+  <input matInput [value]=arretVide.streetmap  #streetmap>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>GoogleMap</mat-label>
+  <input matInput [value]=arretVide.googlemap #googlemap>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>ville</mat-label>
+  <input matInput [value]=arretVide.ville  #ville>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Latitude</mat-label>
+  <input matInput [value]=arretVide.latitude  #latitude>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Longitude</mat-label>
+  <input matInput [value]=arretVide.longitude  #longitude>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Défi Associé</mat-label>
+  <input matInput [value]=arretVide.iddefis  #iddefis>
+</mat-form-field>
+
+<button mat-raised-button color ="primary" (click)="creerArret(nom.value,code.value,streetmap.value,googlemap.value,ville.value,latitude.value,longitude.value,iddefis.value)"
+    >
+    Éditer un nouvel Arrêt</button>
+
+<button mat-raised-button color ="primary" (click)="miseAjourArret(nom.value,code.value,streetmap.value,googlemap.value,ville.value,latitude.value,longitude.value,iddefis.value)"
+                                  >Mettre à jour Les informations de L'arrêt </button>
+
+
+
+<button mat-raised-button color ="primary" (click)="desactiverEdtionArret()"
+                                  >Annuler</button>
+</section>
+  <pre>
+    {{arretNew | async |json}}
+  </pre>
+
+<pre>
+
+  <button mat-raised-button color ="primary" *ngIf = "obs | async as observable" (click)="obsUser()"> Chamis </button>
+
+  <table *ngIf=" users |async">
+    <tbody>
+      <tr>
+        <td>Auteur</td>
+        <td>ÂGE</td>
+        <td>Défis créée</td>
+      </tr>
+      <tr *ngFor =" let utilisateur of users |async" (click)="recupererChami(utilisateur)" >
+        <td> {{utilisateur.pseudo}}</td>
+        <td> {{utilisateur.age}}</td>
+        <td> {{trouveNbDEFI(utilisateur.pseudo)}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+  <!-- Table Arret -->
+ <button  mat-raised-button color ="primary" *ngIf = "obs | async as observable" (click)="obsArretCrees()"> Arrêt des défis </button>
+  <table *ngIf=" arrets |async">
+    <tbody>
+      <tr>
+        <td>Nom</td>
+        <td>StreetMap</td>
+        <td>GoogleMap</td>
+        <td>Ville</td>
+        <td>Latitude</td>
+        <td>Longitude</td>
+        <td>Défi Associé</td>
+      </tr>
+      <tr *ngFor =" let arret of arrets |async" (click)="recupererArret(arret)" >
+        <td> {{arret.nom}}</td>
+        <td> {{arret.streetmap}}</td>
+        <td> {{arret.googlemap}}</td>
+        <td> {{arret.ville}}</td>
+        <td> {{arret.latitude}}</td>
+        <td> {{arret.longitude}}</td>
+        <td> {{arret.iddefis}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+
+  <button mat-raised-button color ="primary" *ngIf = "obs | async as observable" (click)="obsDefi()"> Défis </button>
+
+  <table *ngIf=" defis |async">
+    <tbody>
+      <tr>
+        <td>Défi</td>
+        <td>Titre</td>
+        <td>Auteur</td>
+        <td>Date de création</td>
+        <td>Latitude</td>
+        <td>Longitude</td>
+      </tr>
+      <tr *ngFor =" let defi of defis |async">
+
+        <td>{{defi.id}}</td>
+        <td>{{defi.titre}}</td>
+        <td>{{defi.auteur}}</td>
+        <td>{{defi.dateDeCreation}}</td>
+        <td>{{defi.latitude}}</td>
+        <td>{{defi.longitude}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+
+</pre>
+
+    <yaga-map
+      [lng]="5.724524" [lat]="45.188529" [zoom]="12">
+      <yaga-tile-layer [(url)]="tileLayerUrl"></yaga-tile-layer>
+     <yaga-marker *ngFor =" let defi of defistab"
+                    [lng] = "defi.longitude"
+                    [lat] = "defi.latitude"
+                    [display] = "true"
+                    [opacity] = "1"
+                    >
+
+
+      <yaga-icon [iconUrl]="iconMarker"></yaga-icon>
+           <yaga-popup >{{defi.description}}</yaga-popup>
+     </yaga-marker>
+
+<!--- Affiche des lignes de transport -->
+      <yaga-polyline
+        *ngFor="let ligne of donnees.features"
+        [color] = "convertToString(ligne.properties.COULEUR)"
+        [geoJSON] = "ligne"
+        >
+          <yaga-popup>
+            <h1>Ligne {{ligne.properties.NUMERO}}</h1>
+            <h4>Destination de la ligne : {{ligne.properties.LIBELLE}}</h4>
+          </yaga-popup>
+        </yaga-polyline>>
+
+    </yaga-map>

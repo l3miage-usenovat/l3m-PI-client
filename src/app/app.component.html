@@ -1,38 +1,21 @@
+
+<div class="link-group">
+  <a class="a" routerLink="cartographe" >Cartographe</a>
+  <a class="a" routerLink="assistant">Assistant</a>
+</div>
+
+
 <mat-toolbar >
-  <button mat-icon-button class="example-icon" aria-label="Menu">
-    <mat-icon (click)="drawer.toggle()">menu</mat-icon>
-  </button>
-
-  <label>
-    Projet intégrateur
-  </label>
-
-  <label class="spacer"></label>
-
-
+    <label class="spacer"></label>
     <mat-icon  *ngIf="!(obs |async ) " [matMenuTriggerFor]="menuConnect"  >
-
            account_circle
+    </mat-icon>
 
-       </mat-icon>
-
-    <mat-icon  [matMenuTriggerFor]="menuDisconnect"  >
-        <div *ngIf = "obs | async as observable">
-        <div>{{observable.isAnonymous}}</div>
-        account_circle
-
-
-
-        </div>
-     </mat-icon>
-
-
-
-
-
-
-
-
+    <section  [matMenuTriggerFor]="menuDisconnect"  >
+        <div *ngIf = "obs | async as user">
+          <div>{{recuperUserCourant(user)}}</div>
+          <div> {{chamisCourant.pseudo}} </div><img [src]="user.photoURL"/></div>
+    </section>
     <mat-menu  #menuConnect="matMenu"   >
       <div >
         <button mat-menu-item
@@ -40,177 +23,69 @@
         <img [src]="dataIconGoogle" width="24" height="24"/>
         &nbsp;
         <span >Login avec Google</span>
-
-      </button>
-
+       </button>
       </div>
-
-
-
-
     </mat-menu>
-
-
    <mat-menu   #menuDisconnect="matMenu" >
-
     <button mat-menu-item
         (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Déconnexion</span>
       </button>
-
-
-
   </mat-menu>
-
-
-
 </mat-toolbar>
 
-<mat-drawer-container class="example-container">
-  <mat-drawer #drawer [mode]="mode.value">
+ <pre>
 
-    Placez votre menu ici...
+  <div *ngIf="obs | async as userCourant">
+    <section *ngIf="!estUnchami && estInscrisMaintenant">
+      <div>
+        <h2> Bienvenu sur ce site !</h2>
+        <p> Mr {{userCourant.displayName}}, Vous ne faites pas encore partie de la grande communauté des chaMis !! <br/>
+          Inscrivez-vous en remplissant ce formulaire et profiter de la chance d'être un ChaMis!
 
-  </mat-drawer>
-  <mat-drawer-content>
-    <mat-form-field>
-      <mat-label>Sidenav mode</mat-label>
-      <mat-select #mode value="push">
-        <mat-option value="side">Side</mat-option>
-        <mat-option value="over">Over</mat-option>
-        <mat-option value="push">Push</mat-option>
-      </mat-select>
-    </mat-form-field>
+        </p>
 
+      </div>
+      <form class="formulaire">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" [value]=userCourant.email #email>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Pseudo</mat-label>
+          <input matInput type="text" #pseudo>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Âge</mat-label>
+          <input matInput type="text" #age>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Ville</mat-label>
+          <input matInput type="text" #ville>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput  #description></textarea>
+        </mat-form-field>
+        <div class="bouton inscription">
 
-
-<pre>
-
-  <!-- Affichage et edition des details d'un defi-->
-  <form (action) = "creationDefi(idDefi.value,titre.value,arret.value,motCle.value,description.value)">
-    <label>Défi</label>          <input type="text" #idDefi/>
-
-    <label>Titre</label>         <input type="text" #titre/>
-
-    <label>Arrêt</label>         <select #arret>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-                                   <option> HUBERT-DUBEBOUT MAISON DU TOURISME </option>
-
-                                 </select>
-
-    <label>Mots clés</label>     <input type="text" #motCle/>
-
-    <label>Description</label>   <textarea class="form-control" #description rows="7"></textarea>
-
-  </form>
-
-  <button (click)="CreateNewUser()">
-    tester la fonction de creation de Chami
-  </button>
-
-  <button *ngIf = "obs | async as observable" (click)="obsUser()"> Chamis </button>
-
-  <table *ngIf=" users |async">
-    <tbody>
-      <tr>
-        <td>Auteur</td>
-        <td>ÂGE</td>
-        <td>Défis créée</td>
-      </tr>
-      <tr *ngFor =" let utilisateur of users |async" >
-        <td> {{utilisateur.pseudo}}</td>
-        <td> {{utilisateur.age}}</td>
-        <td> {{trouveNbDEFI(utilisateur.pseudo)}}</td>
-
-      </tr>
-    </tbody>
-  </table>
-  <button  *ngIf = "obs | async as observable" (click)="obsDefi()"> Défis </button>
-
-  <table *ngIf=" defis |async">
-    <tbody>
-      <tr>
-        <td>Défi</td>
-        <td>Titre</td>
-        <td>Auteur</td>
-        <td>Date de création</td>
-        <td>Latitude</td>
-        <td>Longitude</td>
-      </tr>
-      <tr *ngFor =" let defi of defis |async">
-
-        <td>{{defi.id}}</td>
-        <td>{{defi.titre}}</td>
-        <td>{{defi.auteur}}</td>
-        <td>{{defi.dateDeCreation}}</td>
-        <td>{{defi.latitude}}</td>
-        <td>{{defi.longitude}}</td>
-
-      </tr>
-    </tbody>
-  </table>
+        <button  (click)="inscrireChamis(email.value,pseudo.value,age.value ,ville.value, description.value)">M'inscrire</button>
 
 
-</pre>
+        <button  (click)="inscrirePlustard()">Plus tard</button>
 
+        </div>
 
+      </form>
+    </section>
+  </div>
+ </pre>
 
+ <div>
+  <router-outlet></router-outlet>
+</div>
 
-    <yaga-map *ngIf = "obs | async as observable"
-      [lng]="5.724524" [lat]="45.188529" [zoom]="12">
-      <yaga-tile-layer [(url)]="tileLayerUrl"></yaga-tile-layer>
-      <!-- ajout des arrêt  45.19029073446951, 5.728219999998793 -->
-      <!-- pour ajouter  les defis sur la map nous avons besoins de la longitude et de la
-        latitude,  une idée voudrait que nous ajoutons des atributs latitude et longitude à la BD qui
-        serviront à recuperer et à afficher les defi à la position ansi decrite -->
-     <yaga-marker *ngFor =" let defi of defistab"
-                    [lng] = "defi.longitude"
-                    [lat] = "defi.latitude"
-                    [display] = "true"
-                    [opacity] = "1"
-                    >
-
-
-      <yaga-icon [iconUrl]="iconMarker"></yaga-icon>
-           <yaga-popup >{{defi.description}}</yaga-popup>
-     </yaga-marker>
-
-     <!-- <yaga-marker
-                    [lng] = "5.724524"
-                    [lat] = "45.188529"
-                    [display] = "true"
-                    [opacity] = "1"
-                    > --> <!-- à retoucher -->
-
-
-        <!--<yaga-icon [iconUrl]="iconMarker"></yaga-icon>
-
-      </yaga-marker>-->
-
-
-      <yaga-polyline
-        *ngFor="let ligne of donnees.features"
-        [color] = "convertToString(ligne.properties.COULEUR)"
-        [geoJSON] = "ligne"
-        >
-          <yaga-popup>
-            <h1>Ligne {{ligne.properties.NUMERO}}</h1>
-            <h4>Destination de la ligne : {{ligne.properties.LIBELLE}}</h4>
-          </yaga-popup>
-        </yaga-polyline>>
-
-    </yaga-map>
-
-
-  </mat-drawer-content>
-</mat-drawer-container>
 
 
 

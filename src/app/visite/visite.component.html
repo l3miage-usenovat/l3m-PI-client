@@ -1,0 +1,26 @@
+<h1 *ngIf="defi !== undefined">Vous etes en mode VISITE</h1>
+
+
+  <div *ngFor="let d of descriptionsTot|async">
+    <div *ngIf="d.id===defi?.id">
+
+      <div *ngIf="d.nom==='indice'">
+        <p>L'indice {{d.labele}}. (Points: {{d.points}})</p>
+        <a (click)="pointI(d)" class="a" routerLink="description">Afficher</a>
+        <app-description [description]="d" [etapeSuive]="etapeSuiv"></app-description>
+
+      </div>
+
+      <div *ngIf="d.nom==='question'">
+        <p>Question {{d.labele}}. (Points: {{d.points}})</p>
+        <button (click)="pointQ(d)">Afficher</button>
+        <p *ngIf="etapeSuiv===true">{{d.descriptions}}</p>
+        <p>Point a la fin: {{point}}</p>
+        <button (click)="etapeSuiv=false">Fermer</button>
+      </div>
+
+      <p>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      </p>
+    </div>
+  </div>
+

@@ -1,0 +1,80 @@
+<div style="text-align:center">
+  <h1>
+    Bienvenue dans l'interface Assistant
+  </h1>
+</div>
+
+<form class="recherche" (ngSubmit)="filtreSubj.next(recherche.value)">
+  <input type="search" placeholder="Rechercher par arret/titre/auteur.." #recherche>
+  <button  type="button" (click)="filtreSubj.next(recherche.value)">Rechercher</button>
+</form>
+
+<!--Table des defis recherché-->
+<div *ngIf="defisRecherche | async as LD">
+    <h3 id="h3">Defis:</h3>
+    <p>Choisisez le defis que vous voulez realiser.</p>
+    <table id="defis">
+      <tr>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Date de creation</th>
+        <th>Auteur</th>
+        <th>Arret</th>
+        <th>Description</th>
+      </tr>
+      <tr *ngFor="let i of LD" (click)="choisirDefis(i)">
+        <td>{{i.id}}</td>
+        <td>{{i.titre}}</td>
+        <td>{{i.dateDeCreation}}</td>
+        <td>{{i.auteur}}</td>
+        <td>{{i.arret}}</td>
+        <td>{{i.description}}</td>
+    </table>
+</div>
+
+<!--Map-->
+<div id="frugalmap"></div>
+
+ <!--Defis choisi-->
+<div *ngIf="defiChoisi !== undefined" class="papper" class="paper">
+    <h3 id="h32">Defis choisi:</h3>
+          <p id="p2">ID: {{defiChoisi?.id}}</p>
+          <p id="p2">Titre: {{defiChoisi?.titre}}</p>
+          <p id="p2">Date de creation: {{defiChoisi?.dateDeCreation}}</p>
+          <p id="p2">Auteur: {{defiChoisi?.auteur}}</p>
+          <p id="p2">Arret: {{defiChoisi?.arret}}</p>
+          <p id="p2">Distanciel: {{defiChoisi?.distanciel}}</p>
+          <p id="p2">Duree: {{defiChoisi?.duree}}</p>
+          <p id="p2">Points: {{defiChoisi?.points}}</p>
+          <p id="p2">Mots cles: {{defiChoisi?.motcles}}</p>
+          <p id="p2">Prologue: {{defiChoisi?.epilogue}}</p><!--Faut changer a i.prologue-->
+          <button><a class="a" routerLink="visite">Commencer</a></button>
+ </div>
+
+ <app-visite [defi]="defiChoisi"></app-visite>
+
+
+
+
+
+
+
+
+<!--Table des defis-->
+<!--<h3>Tous nos defis disponibles:</h3>
+<table id="defis">
+  <tr>
+    <th>ID</th>
+    <th>Titre</th>
+    <th>Date de creation</th>
+    <th>Auteur</th>
+    <th>Description</th>
+  </tr>
+  <tr *ngFor="let defi of defis|async">
+    <td>{{defi.id}}</td>
+    <td>{{defi.titre}}</td>
+    <td>{{defi.dateDeCreation}}</td>
+    <td>{{defi.auteur}}</td>
+    <td>{{defi.description}}</td>
+  </tr>
+</table>-->

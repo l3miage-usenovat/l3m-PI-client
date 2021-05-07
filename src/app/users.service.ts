@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Chami } from './ChamoiDefinition';
+import { EmailValidator } from '@angular/forms';
 
 
 @Injectable({
@@ -9,6 +10,7 @@ import { Chami } from './ChamoiDefinition';
 })
 export class UsersService {
 
+  ressourceChamis:string = 'http://localhost:5000/api/users/';
 
 
   constructor(private requete: HttpClient) { }
@@ -17,9 +19,27 @@ export class UsersService {
     return this.requete.get<Chami[]>('http://localhost:5000/api/users/');
   }
 
-  addNewUser(person:Chami): void{
+  addNewUser(email:string,login:string,age:string,ville:string,description:string): Observable<Chami>{
+    let newChamis :Chami={
+      email: email,
+      pseudo: login,
+      age:age,
+      ville:ville,
+      description:description
+    }
+    return this.requete.post<Chami>(this.ressourceChamis+newChamis.pseudo,newChamis);
 
-    this.requete.post<Chami>('http://localhost:5000/api/users/'+person.pseudo,person);
-    console.log('succed');
+  }
+  updateChamis(email:string,login:string,age:string,ville:string,description:string): Observable<Chami>{
+    let newChamis :Chami={
+      email: email,
+      pseudo: login,
+      age:age,
+      ville:ville,
+      description:description
+    }
+    console.log(this.requete.put<Chami>(this.ressourceChamis+newChamis.pseudo,newChamis))
+    return this.requete.put<Chami>(this.ressourceChamis+newChamis.pseudo,newChamis);
+
   }
 }

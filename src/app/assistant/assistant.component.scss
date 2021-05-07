@@ -1,0 +1,102 @@
+h1 {
+  color: rgb(11, 138, 211);
+}
+
+#h3 {
+  margin-left: 10px;
+  margin-top: 50px;
+}
+
+#h32 {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+p {
+  margin-left: 10px;
+}
+
+#p2 {
+  margin-left: 30px;
+}
+
+#frugalmap {
+  height: 500px;
+  width: 57%;
+  float: left;
+  margin-left: 10px;
+}
+
+//DEFIS AFFICHAGE
+#defis {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#defis td, #defis th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#defis tr:nth-child(even){background-color: #f2f2f2;}
+
+#defis tr:hover {background-color: #ddd;}
+
+#defis th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+//////////////////////////////////////////////////////////////////////////////////
+
+//BAR DE RECHERCHE AFFICCHAGE
+.recherche input[type=search] {
+  padding: 6px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 17px;
+  width: 350px;
+  height: 40px;
+  border: 3px solid rgb(11, 138, 211)
+}
+///////////////////////////////////////////////////////////////////////////////////
+
+// Button Recherche
+button {
+  border: 3px solid rgb(11, 138, 211);
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 150px;
+  height: 40px;
+  text-decoration: none;
+  padding-top: 2px;
+  background-color: rgb(11, 138, 211);
+  color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+//Defis choisi papper
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Handlee);
+.paper {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    min-width: 400px;
+    height: 480px;
+    margin: 0 auto;
+    background: #f8e2c2;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    overflow: hidden;
+    margin-top: 10px;
+}
+/////////////////////////////////////////////////////////////

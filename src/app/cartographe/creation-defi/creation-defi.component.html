@@ -1,0 +1,118 @@
+<h2 mat-dialog-title>Enregistrer un défi</h2>
+<div mat-dialog-content>
+<form [formGroup]="form">
+  <div class="formulaire">
+    <div formGroupName='creation'>
+    <mat-form-field appearance="fill" class="defi">
+
+      <mat-label>Défi</mat-label>
+      <input matInput formControlName="defi" #defi >
+
+      <mat-error>L'id du défi est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="titre">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName='titre' #titre>
+      <mat-error >Le titre du défi est obligatoire.</mat-error>
+    </mat-form-field>
+
+     <mat-form-field appearance="fill" class="dateDecreation">
+      <mat-label>Date de Création </mat-label>
+      <input matInput formControlName='dateDecreation' placeholder="2021-03-15 04:03:00" #dateDecreation>
+      <mat-error >La date de création du défi est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="auteur">
+      <mat-label>Auteur</mat-label>
+      <input matInput formControlName='auteur' #auteur>
+      <mat-error >L'auteur du défi est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="type">
+      <mat-label>Type</mat-label>
+      <input matInput formControlName='type' placeholder="Enigme" #type>
+      <mat-error >Le type du défi est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="dateDemodification">
+      <mat-label>Date de Modification </mat-label>
+      <input matInput formControlName='dateDemodification' [value]=dateDecreation.value #dateDemodification>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="arrets">
+      <mat-label>Arrets</mat-label>
+      <input matInput formControlName="arrets" placeholder="LES TAILLÉES - UNIVERSITÉS" #arrets>
+       <mat-error> choix de l'arret est obligatoire</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="distanciel">
+      <mat-label>Distanciel</mat-label>
+      <input matInput formControlName='distaniel' #distanciel>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" class="motCles">
+      <mat-label>Mots clé</mat-label>
+    <input matInput formControlName='motCles' placeholder="Mouton, StreetArt, Fun, Distanciel" #motCles>
+    <mat-error>les mots clé sont obligatoires </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="point">
+      <mat-label>Points</mat-label>
+    <input matInput formControlName='point' placeholder="16"  #point>
+    <mat-error>les points sont  obligatoires </mat-error>
+    </mat-form-field>
+
+     <mat-form-field appearance="fill" class="duree">
+      <mat-label>Durée</mat-label>
+    <input matInput formControlName='duree' placeholder="15mn"  #duree>
+    <mat-error>les points sont  obligatoires </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="indice">
+      <mat-label>Indices</mat-label>
+    <input matInput formControlName='indice'  #indice>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="evalution">
+      <mat-label>Evalution</mat-label>
+    <input matInput formControlName='evalution'  #evalution>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" class="latitude">
+      <mat-label>Latitude</mat-label>
+    <input matInput formControlName='latidude'  #latitude>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="longitude">
+      <mat-label>Longitude</mat-label>
+    <input matInput formControlName='longitude'  #longitude>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="epilogue">
+      <mat-label>Epilogue</mat-label>
+      <textarea matInput formControlName='description' cols=20 rows=10 #epilogue></textarea>
+      <mat-error>l'épilogue est obligatoire</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="description">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName='description' cols=20 rows=10 #description></textarea>
+      <mat-error>la description est obligatoire</mat-error>
+    </mat-form-field>
+</div>
+</div>
+</form>
+</div>
+<div mat-dialog-actions>
+  <button
+  mat-raised-button color='primary'
+  (click)="creerDefi(defi.value,titre.value,dateDecreation.value,auteur.value,type.value,dateDemodification.value,arrets.value,distanciel.value,point.value,duree.value,indice.value,evalution.value,epilogue.value,description.value,motCles.value)"
+  >Save</button>
+  <button mat-raised-button color='accent' (click)='fermerDefi()'>Close</button>
+</div>
+
+<br/>
+

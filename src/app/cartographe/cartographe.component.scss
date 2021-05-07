@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  mat-toolbar {
+    > mat-icon {
+      user-select: none;
+      transition: transform .3s;
+    }
+    > mat-icon:hover {
+      transform: scale(1.4);
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: solid black 3px;
+    }
+  }
+
+  mat-drawer-container {
+    flex: 1 1;
+    > mat-drawer {
+      border-right: solid grey 3px;
+    }
+  }
+
+
+  yaga-map {
+    height: 480px;
+  }
+}
+
+ table
+{
+    border-collapse: collapse;
+}
+
+
+
+ td,  th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:hover {background-color: #ddd;}
+
+ th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+

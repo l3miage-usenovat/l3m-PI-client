@@ -1,1 +1,26 @@
-<p>inscription works!</p>
+<pre *ngIf = "Ischamis === false">
+  <div> Pas de compte ? Créer un compte </div>
+
+ <form >
+    <label>Email</label>          <input type="email"  #Mail/>
+
+    <label>Pseudo</label>         <input type="text" #Pseudo/>
+
+    <label>Âge</label>            <input type="number" #Age/>
+
+    <label>Ville</label>          <input type="text" #Ville/>
+
+    <label>Description</label>   <textarea class="form-control" #Description rows="5"></textarea>
+
+    <button
+    (click)="inscrireChamis(Mail.value,Pseudo.value,Age.value ,Ville.value, Description.value)
+    ">Créer un compte</button>
+
+  </form>
+
+</pre>
+
+
+<pre>
+  {{chamisNew | async | json}}
+</pre>

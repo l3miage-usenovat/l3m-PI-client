@@ -191,9 +191,73 @@ export class AppComponent  implements OnInit{
   }
 
 
+<<<<<<< HEAD
   obsArretCrees(){
     this.arrets = this.serviceArret.getArretCrees();
+=======
+
+
+    /*tableChamis(): void {
+      fetch('http://chamis.herokuapp.com')
+        .then(res => res.json)
+        .then (data => console.log(data))
+    }*/
+
+    trouveNbDEFI(nom: string): number{
+      let nombre : number = 0;
+      let i: number = 0;
+      for(i= 0 ; i< this.defistab.length; i++){
+        if( this.defistab[i].auteur=== nom){
+          nombre ++;
+        }
+
+      }
+      return nombre;
+    }
+    // doit être
+    CreateNewUser(){
+     const person = {
+        "pseudo":"Tieux",
+        "age": 18,
+        "description": " eh voila je sui un chaMis"
+      }
+      console.log('je suis la')
+      return this.serviceUser.addNewUser(person);
+
+
+    }
+
+
+
+    convertToString(color: any) {
+      return color.split(',').map((component: string) => parseInt(component))
+      .map((component: { toString: (arg0: number) => any; }) => component.toString(16))
+      .map((component: string) => component.padStart(2, '0'))
+      .join('')
+      .padStart(7, '#');
+  }
+
+<<<<<<< HEAD
+  ajout(){
+    this.dialogue.open(CreationDefisComponent);
+  }
+=======
+  // fonction à implementer
+  creationDefi(idDefi: string,titre:string,arret:string,motCle:string,description:string):void{
+    let newDefi!:Defi;
+    newDefi.id = idDefi;
+    newDefi.titre = titre;
+    newDefi.arret = arret;
+    newDefi.motCles  = motCle;
+    newDefi.description = description;
+    // reflichir à l'initialisationn des autre données tel que la latitude
+    // longitude nom auteur et date de creation date de modification
+    // le formulaire servira en effet à modifier des defi existants prendre en compte ce paramètre
+    // dans la mis en place de la fonction
+
+>>>>>>> 2c58b86e500d7506046b294026e7cc8c5ce2a922
 
   }
 
+>>>>>>> c1cec6c59e19d9a69268a5fb48b2d39cbf44e60b
 }

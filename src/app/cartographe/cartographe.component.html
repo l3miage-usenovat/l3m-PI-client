@@ -21,7 +21,7 @@
 <div>
   <button mat-raised-button color="primary" class="defi" (click)="trouverDefisChamisCourant(chamisCourant.pseudo)"
         >Mes  Défis Crées</button>
-    <div *ngIf="chamisNew |async"></div>
+    <div *ngIf="isChamis"></div>
       <section>
       <section class="mesDefis">
       <table *ngIf="statusAfficheDefis">

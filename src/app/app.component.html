@@ -1,3 +1,12 @@
+<mat-toolbar >
+  <button mat-icon-button class="example-icon" aria-label="Menu">
+    <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+  </button>
+
+  <label routerLink=''>
+    Projet intégrateur
+  </label>
+  <button mat-raised-button color='accent' class="creation" (click)="ajout()">Créer un défi</button>
 
 <div class="link-group">
   <a class="a" routerLink="cartographe" >Cartographe</a>
@@ -87,6 +96,7 @@
 </div>
 
 
+<router-outlet></router-outlet>
 
 
 
